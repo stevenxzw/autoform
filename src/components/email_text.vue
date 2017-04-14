@@ -5,7 +5,7 @@
     <div class="form-group"><label :class="['control-label', field.presence ? 'required':'']" id="title_txt">{{field.title_value}}</label>
       <div class="help-block" v-show="field.tips_value">{{field.tips_value}}</div>
       <div class="controls">
-          <Input v-model="field.default_value" placeholder="请输入邮件" class="form-control" @on-blur="checkVil" @on-change="checkVil"></Input>
+          <Input v-model="field.default_value" placeholder="请输入邮件" class="form-control" ></Input>
         </Form>
 <!--         <Input v-model="field.default_value" placeholder="详细描述"  class="form-control"  :disabled="!field.isFront"></Input> -->
         <div class="error-message" v-if="field.errorMsg">
@@ -45,6 +45,12 @@ export default {
 
   created () {
     console.log(this.field.default_value)
+  },
+
+  watch : {
+    'field.default_value' (nv, ov) {
+      this.checkVil()
+    }
   },
 
   methods : {
