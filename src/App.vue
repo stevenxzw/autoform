@@ -2,10 +2,11 @@
   <div class="ttt">
     <template v-if="layout==='admin'">
       <div class="nav-header">
-        <div class="nav-title fl"><i class="el-icon-menu"></i> AutoForm</div>
+        <div class="nav-title fl"><Icon type="arrow-expand" size='24'></Icon> AutoForm</div>
         <div class="fr pt10">
           <ul class="user-nav">
-            <li><el-button type="danger" @click.prevent="logout" :loading="islogout" size="small">退 出</el-button></li>
+            <li>
+            <Button type="error" @click.prevent="logout" :loading="islogout" size="small">退 出</Button></li>
           </ul>
         </div>
       </div>

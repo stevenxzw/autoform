@@ -24,7 +24,6 @@
   height 600px
   position relative
   .field
-    position: relative;
     padding: 15px 0;
   .sidebar
     position absolute
@@ -62,6 +61,13 @@
       font-size: 12px;
       vertical-align: top;
       text-align: left;
+      .ivu-input[disabled]
+        background-color #fff
+      .ivu-radio-inner
+        background-color #fff !important
+      .ivu-checkbox-disabled+span
+        color: #6f6d6d
+
 
   .field
     position relative
@@ -84,6 +90,16 @@
         font-weight normal
         font-size: 14px;
         cursor: pointer;
+    .ivu-icon-drag
+      display none
+    &:hover
+      .ivu-icon-drag
+        display inline
+        position absolute
+        right 10%
+        top 50%
+        font-size 20px
+        font-weight bold
     .form-last
       margin 0
     .help-block
@@ -101,7 +117,7 @@
       position: absolute;
       right: 10px;
       bottom: -12px;
-      width: 68px;
+      width: 70px;
       height: 24px;
       display: none;
       i
@@ -115,10 +131,10 @@
         background: #fdf2f2;
         -webkit-transition: 0.3s;
         transition: 0.3s;
-        margin-left 10px
-      .el-icon-delete2
+        margin-left 5px
+      .ivu-icon-android-delete
         color #FF4949
-      .el-icon-document
+      .ivu-icon-ios-copy
         color #5cb85c
   .field.editing
     border-color: #f5e4e4;
@@ -135,4 +151,6 @@
     .field
       .form-group
         margin-left 20px
+  .time-zindex
+    z-index 100 !important
   

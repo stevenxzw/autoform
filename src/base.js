@@ -19,7 +19,8 @@ export const createFieldId = () => {
 
 export const getCls = (obj) => {
   var newObj = {
-    title_value: '',
+    title_value: '未命名',
+    default_value: '',
     field_id : createFieldId(),
     field_type : false,
     autoRender : true,
@@ -34,18 +35,56 @@ export const getCls = (obj) => {
     presence : '',//必填
     number : '',//数字
     tips_value : '',//提示文案
+    errorMsg: '',
     is_hide: '',//是否隐藏属性
     isFront: false, //是否是前台显示
     editingcs : 'editing',
     getSideBarData : () => {},
   }
   switch(obj.type){
-    case 'Single_line_text':
-      newObj = extendDeep({            
-            title_value: '',
-            default_value : ''}, newObj)
+    case 'email_text':
+      newObj = extendDeep(newObj,{            
+            title_value : '邮件'})
+      break;
+    case 'single_line_text':
+      newObj = extendDeep(newObj, {            
+            default_value : ''})
+    break;
+    case 'single_line_text':
+    // console.log(newObj)
+      newObj = extendDeep(newObj, {            
+            default_value : ''})
+    break;
+    case 'phone_mobile_text' :
+      newObj = extendDeep(newObj, {            
+            title_value: '手机号',
+            default_value : ''})
+    break;
+    case 'single_choice_text' :
+      newObj = extendDeep(newObj, {
+            title_value: '请选择',            
+            items : [{name:'选项',checked:false}]})
+    break;
+    case 'multiple_choice_text' :
+      newObj = extendDeep(newObj, {
+            title_value: '请选择',
+            checkSelect: [{name:'上海',child:['浦东','浦西']}]
+      })
+    break;
+    case 'join_number_text' :
+          newObj = extendDeep(newObj,{  
+            title_value: '参加人数',
+            adult : 1, //大人，-1时不显示
+            children : 1, //学生
+            adult_price: 0, //家长单价
+            children_price: 0,//学生单价
+            adult_max: '',//家长每次可报最大人数
+            children_max: ''//学生每次可报最大人数
+          })
+          // console.log(newObj.title_value)
     break;
   }
+  // console.log(newObj.title_value)
   return extendDeep( newObj, obj)
 }
 
@@ -58,15 +97,22 @@ var extendDeep = (parent, child) => {
     toStr = Object.prototype.toString,
     astr = "[object Array]";
     child = child || {};
-    for (i in parent) {
+    for (i in child) {
         if (parent.hasOwnProperty(i)) {
-            if (typeof parent[i] === "object") {
-                child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+            if (typeof child[i] === "object") {
+                // child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
                 extendDeep(parent[i], child[i]);
             } else {
-                child[i] = parent[i];
+                parent[i] = child[i];
             }
+        }else{
+          parent[i] = child[i]
+          // if (typeof child[i] === "object") {
+          //   extendDeep(parent[i], child[i]);
+          // }else{
+          //   parent[i] = child[i]
+          // }
         }
     }
-    return child;
+    return parent;
 }

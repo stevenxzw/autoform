@@ -5,11 +5,15 @@
     <div class="form-group"><label :class="['control-label', field.presence ? 'required':'']" id="title_txt">{{field.title_value}}</label>
       <div class="help-block" v-show="field.tips_value">{{field.tips_value}}</div>
       <div class="controls">
-        <Input v-model="field.default_value" placeholder="详细描述"  class="form-control"  :disabled="!field.isFront"></Input>
+        <Radio-group v-model="field.checked" :vertical="field.vertical">
+            <Radio :label="item.name" v-for="item in field.items" :disabled="!field.isFront">
+                <span>{{item.name}}</span>
+            </Radio>
+        </Radio-group>
         <div class="error-message" v-if="field.errorMsg">
           <i class="el-icon-warning"></i>
           <span>{{field.errorMsg}}</span>
-        </div>
+        </div>  
       </div>
     </div>
   </div>

@@ -1,36 +1,32 @@
 // 微信扫码登录页
 <template>
   <div class="container">
-    <el-row :gutter="20">
-      <el-col :span="7" :offset="8">
-        <div class="panle login">
-          <div class="panle-title">自定义表单</div>
-          <div class="panle-body">
-<!--             <el-input v-model="username" placeholder="请输入帐号"></el-input>
-            <el-input type="password" v-model="password" placeholder="请输入密码"></el-input> -->
-            <el-form ref="loginForm" :model="loginForm" label-width="0px">
-              <el-form-item 
-                prop="username"
-                :rules="[
-                  { required: true, message: '请填写帐号'}
-                ]">
-                <el-input v-model="loginForm.username" placeholder="请填写帐号" ></el-input>
-              </el-form-item>
-              <el-form-item
-                prop="password"
-                :rules="[
-                  { required: true, message: '请填写密码'}
-                ]">
-                <el-input v-model="loginForm.password" placeholder="请填写密码" type="password"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" class="login-btn" :loading=lg @click="login('loginForm')">登 录</el-button>
-              </el-form-item>
-            </el-form>
+   <Row>
+        <Col span="7" offset="8">
+          <div class="panle login">
+            <div class="panle-title">Autoform</div>
+            <div class="panle-body">
+
+                <Form ref="loginForm" :model="loginForm" :rules="ruleInline">
+                  <Form-item prop="username">
+                      <Input type="text" v-model="loginForm.username" placeholder="Username">
+                          <Icon type="ios-person-outline" slot="prepend"></Icon>
+                      </Input>
+                  </Form-item>
+                  <Form-item prop="password">
+                      <Input type="password" v-model="loginForm.password" placeholder="Password">
+                          <Icon type="ios-locked-outline" slot="prepend"></Icon>
+                      </Input>
+                  </Form-item>
+                  <Form-item>
+                      <Button type="primary" :loading=lg @click="login('loginForm')" long>登录</Button>
+                  </Form-item>
+              </Form>
+            </div>
           </div>
-        </div>
-      </el-col>
-    </el-row>
+
+        </Col>
+    </Row>
   </div>
 </template>
 <script>
@@ -46,6 +42,15 @@
             username: 'admin',
             password: '123456789',
             desc: ''
+          },
+          ruleInline: {
+              username: [
+                  { required: true, message: '请填写用户名', trigger: 'blur' }
+              ],
+              password: [
+                  { required: true, message: '请填写密码', trigger: 'blur' },
+                  { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+              ]
           }
         }
       },
